@@ -1,0 +1,27 @@
+vrrp_instance VI_1 {
+state BACKUP
+interface eth2
+virtual_router_id 1
+priority 50
+authentication {
+    auth_type PASS
+    auth_pass A111111a
+    }
+virtual_ipaddress {
+    {{ hostvars['haproxy1']['ansible_eth2']['ipv4']['address'] }}1
+    }
+}
+
+vrrp_instance VI_2 {
+state MASTER
+interface eth2
+virtual_router_id 2
+priority 100
+authentication {
+    auth_type PASS
+    auth_pass Q111111q
+    }
+virtual_ipaddress {
+    {{ hostvars['haproxy2']['ansible_eth2']['ipv4']['address'] }}1
+    }
+}

@@ -1,0 +1,11 @@
+---
+
+- name: Ensure python-apt is installed
+  command: >
+    apt-get install python-apt -y -q
+    creates=/usr/share/doc/python-apt
+
+- name: Install unzip
+  apt: name=unzip update_cache=yes state=latest
+
+- include: ntp.yml

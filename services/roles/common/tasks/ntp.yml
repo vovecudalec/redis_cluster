@@ -1,0 +1,8 @@
+  - name: Install NTP
+    apt: package=ntp state=present update_cache=yes
+
+  - name: Make sure NTP is started up
+    service: name=ntp state=started enabled=yes
+
+  - name: set time zone
+    command: timedatectl set-timezone Europe/Moscow

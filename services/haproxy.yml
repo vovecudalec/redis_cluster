@@ -1,0 +1,13 @@
+---
+
+- hosts: web database haproxy
+  user: vagrant
+  become: yes
+  roles: []
+
+- hosts: haproxy
+  user: vagrant
+  become: yes
+  roles:
+    - haproxy
+#    - keepalived

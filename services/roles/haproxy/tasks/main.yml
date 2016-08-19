@@ -1,0 +1,20 @@
+---
+
+  - name: Add apt repository for haproxy 1.6
+    apt_repository: repo='ppa:vbernat/haproxy-1.6' update_cache='yes'
+
+  - name: Install HAProxy
+    apt: name=haproxy state=present
+
+  - name: Copy HAProxy configuration in place.
+    template:
+      src: haproxy.cfg.j2
+      dest: /etc/haproxy/haproxy.cfg
+      mode: 0644
+    notify: restart haproxy
+
+  - name: Ensure HAProxy is started
+    service: name=haproxy state=started
+
+  - name: Ensure HAProxy is enabled on boot.
+    service: name=haproxy enabled=yes

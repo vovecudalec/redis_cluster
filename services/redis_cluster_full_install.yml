@@ -1,0 +1,21 @@
+---
+
+- hosts: redis haproxy
+  user: vagrant
+  become: yes
+  roles:
+    - common
+
+- hosts: haproxy
+  user: vagrant
+  become: yes
+  roles:
+    - haproxy
+    - keepalived
+
+- hosts: redis
+  user: vagrant
+  become: yes
+  roles:
+    - DavidWittman.redis
+
